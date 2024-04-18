@@ -10,6 +10,12 @@
 	<link rel="icon" type="image/x-icon" href="https://tse3.mm.bing.net/th/id/OIG1.uh8YKl7EiqSnl7DPSB0P?pid=ImgGn">
 
 	 <link rel="manifest" href="./manifest.json">
+
+	 <script>
+		if(typeof navigator.serviceWorker !== "undefined") {
+			navigator.serviceWorker.register('serviceworker.js')
+		}
+	 </script>
 	<script> 
 		document.addEventListener("DOMContentLoaded", () => {
 				const getLocationButton = document.getElementById("getLocation");
