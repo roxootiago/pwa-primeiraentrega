@@ -1,0 +1,24 @@
+{
+  "background_color": "#191a1f",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "FitBuddy",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "FitBuddy",
+  "start_url": "/",
+  "theme_color": "#191a1f",
+  "icons": [
+    {
+      "src":"assets/img/android/android-launchericon-48-48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    }
+  ],
+  "description": "Pratique exercícios de forma simples e eficaz",
+  "lang": "pt",
+  "categories": [
+    "exercise",
+    "education"
+  ]
+}
