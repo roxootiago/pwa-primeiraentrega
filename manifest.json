@@ -6,7 +6,7 @@
   "orientation": "any",
   "scope": "/",
   "short_name": "FitBuddy",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "theme_color": "#191a1f",
   "icons": [
     {
