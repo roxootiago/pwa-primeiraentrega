@@ -1,0 +1,439 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>FitBuddy</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+
+	 <link rel="manifest" href="./manifest.json">
+	<script> 
+		document.addEventListener("DOMContentLoaded", () => {
+				const getLocationButton = document.getElementById("getLocation");
+				const userLocationSpan = document.getElementById("userLocation");
+				const distanceSpan = document.getElementById("distance");
+				const arrivalTimeSpan = document.getElementById("arrivalTime");
+
+				getLocationButton.addEventListener("click", () => {
+					if ("geolocation" in navigator) {
+						navigator.geolocation.getCurrentPosition((position) => {
+							const userLat = position.coords.latitude;
+							const userLng = position.coords.longitude;
+
+							const restaurantLat = -8.058537348618817;
+							const restaurantLng = -34.88756728803565;
+
+							const distance = calculateDistance(userLat, userLng, restaurantLat, restaurantLng);
+							const arrivalTime = calculateArrivalTime(distance);
+
+							userLocationSpan.textContent = `${userLat.toFixed(6)}, ${userLng.toFixed(6)}`;
+							distanceSpan.textContent = distance.toFixed(2);
+							arrivalTimeSpan.textContent = arrivalTime.toFixed(0);
+						});
+					} else {
+						alert("Geolocalização não está disponível no seu navegador.");
+					}
+				});
+
+				function calculateDistance(lat1, lon1, lat2, lon2) {
+					const R = 6371; // Raio da Terra em km
+					const dLat = deg2rad(lat2 - lat1);
+					const dLon = deg2rad(lon2 - lon1);
+					const a =
+						Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+						Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+					const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+					const distance = R * c;
+					return distance;
+				}
+
+				function deg2rad(deg) {
+					return deg * (Math.PI / 180);
+				}
+
+				function calculateArrivalTime(distance) {
+					// Suponha uma velocidade média de 40 km/h (substitua pela velocidade real)
+					const averageSpeed = 40;
+					const time = (distance / averageSpeed) * 60; // Tempo em minutos
+					return time;
+				}
+			});
+	</script>
+</head>
+
+<body class="homepage is-preload">
+	<div id="page-wrapper">
+
+		<!-- Header  	-->
+		<section id="header">
+			
+			<h1 ><a id="fixed-title" href="index.html">Fitbuddy</a></h1>
+			<!-- Logo -->
+
+			<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="current"><a href="index.html">Início</a></li>
+					<li>
+						<a href="#">Atividades</a>
+						<ul>
+							<li>
+								<a href="#">Treinos</a>
+								<ul>
+									<li><a href="#">Cardio</a></li>
+									<li><a href="#">Musculação</a></li>
+									<li><a href="#">Flexibilidade</a></li>
+									<li><a href="#">Esportes</a></li>
+								</ul>
+							</li>
+							<li><a href="#">Dietas</a></li>
+							<li>
+								<a href="#">Phasellus consequat</a>
+							</li>
+							<li><a href="#">Veroeros feugiat</a></li>
+						</ul>
+					</li>
+					<li><a href="#academias">Academias</a></li>
+					<li><a href="right-sidebar.html">Receitas Fit</a></li>
+					<li>
+						<a href="no-sidebar.html">Perfil</a>
+						<ul>
+							<li><a href="#">Conta</a></li>
+							<li><a href="#">Relatório</a></li>
+							<li><a href="#">Receitas Fit</a></li>
+							<li><a href="#">Configurações</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Banner -->
+			<h2 class="title-header">Bem vindo de volta! &#x1F44B;</h2>
+			<div class="header-container">
+				<p>Últimas atividades:</p>
+				<p id="view-all">Ver todas</p>
+			</div>
+
+			<!-- Intro -->
+			<section id="intro" class="container">
+				<div class="row">
+
+					<div class="row">
+						<div class=" rounded   gallery_product col-4 col-6-medium col-12-small">
+							<section class="first">
+								<a href="#" class="gradient-overlay img-caroussel rounded image featured "><img
+										class="img-caroussel " src="images/exercicio-fisico.png"
+										alt="mulher-em-corrida" /></a>
+								<h3 class="title">Cardio</h3>
+								<div class="container-inline">
+									<i class="icon-s container-smartphone icon solid  fa-solid fa-stopwatch"></i>
+									<p class="subtitle">Tempo estimado: 30min</p>
+								</div>
+
+							</section>
+						</div>
+
+
+			</section>
+
+		</section>
+
+		<!-- Main -->
+		<section id="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<main>
+							<div id="location">
+								<div id="restaurant" class="col-4 ">
+									<h2 class="mb-10">Encontre uma academia próxima</h2>
+									<button id="getLocation" class="bt-gps">Encontrar</button>
+									<p><strong>Sua localização:</strong> <span id="userLocation"></span></p>
+								</div>
+								<p><strong>Endereço:</strong> Smartfit Boa Vista, Pe</p>
+								<p><strong>Distância:</strong> <span id="distance"></span> km</p>
+								<p><strong>Tempo de Chegada:</strong> <span id="arrivalTime"></span> minutos</p>
+							</div>
+						</main>
+						<!-- Portfolio -->
+						<section>
+							<header class="major">
+								<h2 id="comunidade">Receitas Fit</h2>
+							</header>
+							<div class="row">
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+										<header>
+											<h3>Ipsum feugiat et dolor</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+										<header>
+											<h3>Sed etiam lorem nulla</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+										<header>
+											<h3>Consequat et tempus</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+										<header>
+											<h3>Blandit sed adipiscing</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+										<header>
+											<h3>Etiam nisl consequat</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+								<div class="col-4 col-6-medium col-12-small">
+									<section class="box">
+										<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+										<header>
+											<h3>Dolore nisl feugiat</h3>
+										</header>
+										<p>Lorem ipsum dolor sit amet sit veroeros sed amet blandit consequat veroeros
+											lorem blandit adipiscing et feugiat phasellus tempus dolore ipsum lorem
+											dolore.</p>
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button alt">Find out more</a></li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+							</div>
+						</section>
+
+					</div>
+					<div class="col-12">
+
+						<!-- Blog -->
+						<section>
+							<header id="academias" class="major">
+								<h2>Locais Próximos</h2>
+							</header>
+							<div class="row">
+								<div class="col-6 col-12-small container">
+									<section class="box">
+										<a href="#" class="image featured"><iframe
+												src="https://www.google.com/maps/d/u/0/embed?mid=1f8ohejiY5ns0AWzK5YGzzZnIX7OGb08&ehbc=2E312F&noprof=1"
+												width="100%" height="480"></iframe></a>
+										<header class="mb-05">
+											<h3>Veja locais próximos a você para práticas de exercícios</h3>
+											<p>Posted 45 minutes ago</p>
+										</header>
+
+										<p>Agora ficou mais fácil de localizar locais para práticas de
+											exercícios próximos a sua localidade</p>
+
+										<footer>
+											<ul class="actions">
+												<li><a href="#" class="button icon solid fa-file-alt">Ver lista
+														Completa</a></li>
+												<li><a href="#" class="button alt icon solid fa-comment">33 comments</a>
+												</li>
+											</ul>
+										</footer>
+									</section>
+								</div>
+
+							</div>
+						</section>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<section id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-8 col-12-medium">
+						<section>
+							<header>
+								<h2>Próximos eventos esportivos</h2>
+							</header>
+							<ul class="dates">
+								<li>
+									<span class="date">Maio <strong>07</strong></span>
+									<h3><a href="#">Corrida na jaqueira</a></h3>
+									<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat
+										etiam.</p>
+								</li>
+								<li>
+									<span class="date">Maio <strong>13</strong></span>
+									<h3><a href="#">Bicicletada no Marco Zaro</a></h3>
+									<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing
+										feugiat lorem.</p>
+								</li>
+								<li>
+									<span class="date">Jun <strong>15</strong></span>
+									<h3><a href="#">Trilha na Várzea</a></h3>
+									<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit
+										consequat.</p>
+								</li>
+								<li>
+									<span class="date">Jun <strong>19</strong></span>
+									<h3><a href="#">Corrida Junina</a></h3>
+									<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam
+										consequat.</p>
+								</li>
+								<li>
+									<span class="date">Jun <strong>30</strong></span>
+									<h3><a href="#">corrida solidária</a></h3>
+									<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet
+										dolore.</p>
+								</li>
+							</ul>
+						</section>
+					</div>
+					<div class="col-4 col-12-medium">
+						<section>
+							<header>
+								<h2>What's this all about?</h2>
+							</header>
+							<a href="#" class="image featured"><img src="images/pic10.jpg" alt="" /></a>
+							<p>
+								This is <strong>Dopetrope</strong> a free, fully responsive HTML5 site template by
+								<a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>
+								It's released for free under
+								the <a href="http://html5up.net/license/">Creative Commons Attribution</a> license so
+								feel free to use it for any personal or commercial project &ndash; just don't forget to
+								credit us!
+							</p>
+							<footer>
+								<ul class="actions">
+									<li><a href="#" class="button">Find out more</a></li>
+								</ul>
+							</footer>
+						</section>
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
+						
+					</div>
+					<div class="col-4 col-6-medium col-12-small">
+						
+					</div>
+					<div class="col-4 col-12-medium">
+						<section>
+							<header>
+								<h2>Vitae tempor lorem</h2>
+							</header>
+							<ul class="social">
+								<li><a class="icon brands fa-facebook-f" href="#"><span
+											class="label">Facebook</span></a></li>
+								<li><a class="icon brands fa-twitter" href="#"><span class="label">Twitter</span></a>
+								</li>
+								<li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a>
+								</li>
+								<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li>
+								<li><a class="icon brands fa-linkedin-in" href="#"><span
+											class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="contact">
+								<li>
+									<h3>Address</h3>
+									<p>
+										Untitled Incorporated<br />
+										1234 Somewhere Road Suite<br />
+										Nashville, TN 00000-0000
+									</p>
+								</li>
+								<li>
+									<h3>Mail</h3>
+									<p><a href="#">someone@untitled.tld</a></p>
+								</li>
+								<li>
+									<h3>Phone</h3>
+									<p>(800) 000-0000</p>
+								</li>
+							</ul>
+						</section>
+					</div>
+					<div class="col-12">
+
+						<!-- Copyright -->
+						<div id="copyright">
+							<ul class="links">
+								<li>&copy; Untitled. All rights reserved.</li>
+								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
