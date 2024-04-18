@@ -6,7 +6,7 @@
   "orientation": "any",
   "scope": "/",
   "short_name": "FitBuddy",
-  "start_url": "/",
+  "start_url": "index.html",
   "theme_color": "#191a1f",
   "icons": [
     {
@@ -22,7 +22,7 @@
     {
       "src": "assets/images/android/android-launchericon-96-96.png",
       "type": "image/png",
-      "sizes": "72x72"
+      "sizes": "96x96"
     }
   ],
   "description": "Pratique exercícios de forma simples e eficaz",
