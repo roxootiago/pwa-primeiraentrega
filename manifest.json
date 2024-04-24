@@ -1,13 +1,7 @@
 {
-  "background_color": "#191a1f",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "FitBuddy",
-  "orientation": "any",
-  "scope": "/",
   "short_name": "FitBuddy",
-  "start_url": "/",
-  "theme_color": "#191a1f",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "assets/images/android/android-launchericon-48-48.png",
@@ -30,5 +24,9 @@
   "categories": [
     "exercise",
     "education"
-  ]
+  ],
+  "display": "standalone",
+  "background_color": "#191a1f",
+  "theme_color": "#191a1f",
+  "orientation": "any"
 }
