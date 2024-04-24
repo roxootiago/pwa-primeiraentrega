@@ -11,7 +11,22 @@
 
 
 	 <link rel="manifest" href="manifest.json">
-
+<script>
+	let newWorker;
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('/serviceworker.js').then(reg => {
+			reg.addEventListener('updatefound', () => {
+				newWorker = reg.installing;
+			});
+		});
+		let refreshing;
+		navigator.serviceWorker.addEventListener('controllerchange', function () {
+			if (refreshing) return;
+			window.location.reload();
+			refreshing = true;
+		});
+	}
+</script>
 	 
 	<script> 
 		document.addEventListener("DOMContentLoaded", () => {
@@ -431,22 +446,7 @@
 	</div>
 
 	<!-- Scripts -->
-	<script>
-		let newWorker;
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/serviceworker.js').then(reg => {
-				reg.addEventListener('updatefound', () => {
-					newWorker = reg.installing;
-				});
-			});
-			let refreshing;
-			navigator.serviceWorker.addEventListener('controllerchange', function () {
-				if (refreshing) return;
-				window.location.reload();
-				refreshing = true;
-			});
-		}
-	</script>
+	
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.dropotron.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
