@@ -16,13 +16,13 @@
       "src": "assets/images/android/android-launchericon-96-96.png",
       "type": "image/png",
       "sizes": "96x96"
+    },
+    {
+      
+      "src": "assets/images/ios/512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ],
-  "description": "Pratique exercícios de forma simples e eficaz",
-  "lang": "pt",
-  "categories": [
-    "exercise",
-    "education"
   ],
   "start_url": "index.html",
   "display": "standalone",
